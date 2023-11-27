@@ -14,13 +14,9 @@ public class ClawSubsystem extends SubsystemBase {
   }
 
   private static final class Constants {
-    // TODO: create PneumaticsModuleType set equal to PneumaticsModuletype.REVPH
     private static final PneumaticsModuleType moduleType = PneumaticsModuleType.REVPH;
-    // TODO: create integer for moduleNumber set equal to 17
     private static final int moduleNumber= 17;
-    // TODO: create integer for leftChannel set equal to 0
     private static final int leftChannel = 0;
-    // TODO: create integer for rightChannel set equal to 1
     private static final int rightChannel= 1;
   }
 
@@ -28,9 +24,7 @@ public class ClawSubsystem extends SubsystemBase {
 
 
   // fields
-  // TODO: declare Solenoid variable for leftSolenoid
   private Solenoid leftSolenoid;
-  // TODO: declare Solenoid variable for rightSolenoid
   private Solenoid rightSolenoid; 
   // constructor
   public ClawSubsystem() {
@@ -61,13 +55,10 @@ rightSolenoid = new Solenoid(Constants.moduleNumber, Constants.moduleType, Const
   // command creation methods. Note this only makes a command according
   // to the instructions in the method. It does not connect it to a trigger.
   public Command createSetStateCommand(State state) {
-    // TODO: create a Runnable called clawSetCommandRunnable set equal to () ->
-    // setState(stat
-    // TODO: create a Command called clawSetCommand set equal to
-    // runOnce(clawSetCommandRunnable)
-    // TODO:  setName for clawSetCommand to "Claw " + state.name()
-    // TODO: return clawSetCommand
-    return null; // TODO: remove this line when done
+    Runnable clawSetCommandRunnable = () -> setState(state);
+    Command clawSetCommand = runOnce(clawSetCommandRunnable);
+    clawSetCommand.setName("Claw" + state.name());
+    return clawSetCommand;
   }
 
   // Method runs stuff on subsystem that must change all of the time.
