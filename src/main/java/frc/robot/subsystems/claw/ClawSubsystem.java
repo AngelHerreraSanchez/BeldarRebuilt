@@ -19,14 +19,9 @@ public class ClawSubsystem extends SubsystemBase {
     private static final int leftChannel = 0;
     private static final int rightChannel= 1;
   }
-
-
-
-
-  // fields
+  
   private Solenoid leftSolenoid;
   private Solenoid rightSolenoid; 
-  // constructor
   public ClawSubsystem() {
 leftSolenoid = new Solenoid(Constants.moduleNumber, Constants.moduleType, Constants.leftChannel);
 rightSolenoid = new Solenoid(Constants.moduleNumber, Constants.moduleType, Constants.rightChannel);
