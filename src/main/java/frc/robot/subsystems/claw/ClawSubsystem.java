@@ -6,6 +6,7 @@ import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ClawSubsystem extends SubsystemBase {
@@ -62,7 +63,7 @@ rightSolenoid = new Solenoid(Constants.moduleNumber, Constants.moduleType, Const
     Command setOpenCommand = createSetStateCommand(State.OPEN);
     Command setClosedCommand = createSetStateCommand(State.CLOSED);
     BooleanSupplier selector = () -> getState() == State.CLOSED;
-    Command toggleCommand = Command.either(setOpenCommand, setClosedCommand, selector);
+    Command toggleCommand = Commands.either(setOpenCommand, setClosedCommand, selector);
     toggleCommand.setName("Toggle Command");
     return toggleCommand;  
   }
