@@ -51,11 +51,13 @@ public abstract class ArmSubsystem extends SubsystemBase {
                 LinearSystem<N1, N1, N1> velocityPlant = LinearSystemId.identifyVelocitySystem(kV, kA);
                 // TODO: create a Vector<N1> called velocityQelms and intialize to
                 // VecBuilder.fill(maxVelocityErrorRadiansPerSec)
-                Vector<N1> velocityQelms =  VecBuilder.fill(maxVelocityRadiansPerSec);
+                Vector<N1> VelocityQelms =  VecBuilder.fill(maxVelocityRadiansPerSec);
                 // TODO: create a Vector<N1> called velocityQelms and initialize to
                 // VecBuilder.fill(RobotController.getBatteryVoltage())
+                Vector<N1> velocityQelms = VecBuilder.fill(RobotController.getBatteryVoltage());
                 // TODO: create a LinearQuadraticRegulator<N1, N1, N1> called velocityController
                 // and intialize with appropriate constants
+                
                 // TODO: create a double called kPPosition and initialize to
                 // positionController.getK().get(0, 0);
                 // TODO: create a double called kIPosition and intialize to 0.0
