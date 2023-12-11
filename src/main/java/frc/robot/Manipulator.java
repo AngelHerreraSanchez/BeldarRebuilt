@@ -1,7 +1,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.subsystems.claw.ClawSubsystem;
 
 public class Manipulator {
 
@@ -14,19 +18,19 @@ public class Manipulator {
         }
     }
 
-    // TODO: ANGEL: create a private final field for clawSubsystem of type
-    // ClawSubsystem
+    
+    private final ClawSubsystem clawSubsystem;
     // TODO: KEITH: create a private final field for tiltSubsystem of type
     // TiltSubsystem
 
     public Manipulator() {
-        // TODO: ANGEL: initialize clawSubsystem to new ClawSubsystem();
+        clawSubsystem = new ClawSubsystem();
+
         // TODO: KEITH: initialize tiltSubsystem to new TiltSubsystem();
     }
 
     public void addToDashboard() {
-        // TODO: ANGEL: use the SmartDashboard.putData() method to put clawSubsystem to
-        // the Dashboard
+        SmartDashboard.putData(clawSubsystem);
         // TODO: KEITH: use the SmartDashboard.putData() method to put tiltSubsystem to
         // the Dashboard
 
@@ -41,10 +45,8 @@ public class Manipulator {
     }
 
     public void addTestingCommandsToDashboard() {
-        // TODO: ANGEL create a Command called testOPENCommand using clawSubsystem's
-        // createSetStateCommand()
-        // TODO: ANGEL create a Command called testCLOSEDCommand using clawSubsystem's
-        // createSetStateCommand()
+        Command testOPENCommand = clawSubsystem.createSetStateCommand(ClawSubsystem.State.OPEN);
+        Command testCLOSEDCommamd = clawSubsystem.createSetStateCommand(ClawSubsystem.State.CLOSED);
 
         // TODO: KEITH create a Command called testFULLcommand using tiltSubsystem's
         // createSetStateCommand()
@@ -106,9 +108,10 @@ public class Manipulator {
     public void bindClawManualControlToController(
             CommandXboxController controller, 
             XboxController.Button button) {
-        // TODO:  ANGEL: create a Command called toggleCommand using clawSubsystems createToggleCommand method
-        // TODO:  ANGEL: create a Trigger called trigger and initialize to controller.button(button.value)
-        // TODO:  ANGEL: bind the trigger to the toggleCommand using trigger's onTrue method.  
+        
+        Command toggleCommand = clawSubsystem.createToggleCommand();
+        Trigger trigger = controller.button(button.value);
+        trigger.onTrue(toggleCommand);
 
     }
 
