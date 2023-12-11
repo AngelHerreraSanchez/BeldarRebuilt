@@ -1,5 +1,7 @@
 package frc.robot.subsystems.claw;
 
+import java.util.function.BooleanSupplier;
+
 import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -57,13 +59,12 @@ rightSolenoid = new Solenoid(Constants.moduleNumber, Constants.moduleType, Const
   }
 
   public Command createToggleCommand(){
-    // TODO: create a Command called setOpenCommand and initialize with createSetStateCommand
-    // TODO: create a Command called setClosedCommand and initialize with createSetStateCommand
-    // TODO: create a BooleanSupplier called selector and initialize with () -> getState() == State.Closed
-    // TODO: create a Command called toggleCommand and initialize with Commands.either(setOpenCommand, setClosedCommand, selector);
-    // TODO: use the setName() method from toggleCommand to "Toggle Command"
-    // TODO: return toggleCommand;
-    return null; // TODO: remove this line when done.  
+    Command setOpenCommand = createSetStateCommand(State.OPEN);
+    Command setClosedCommand = createSetStateCommand(State.CLOSED);
+    BooleanSupplier selector = () -> getState() == State.CLOSED;
+    Command toggleCommand = Command.either(setOpenCommand, setClosedCommand, selector);
+    toggleCommand.setName("Toggle Command");
+    return toggleCommand;  
   }
 
   // Method runs stuff on subsystem that must change all of the time.
