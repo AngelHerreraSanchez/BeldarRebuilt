@@ -6,6 +6,7 @@ package frc.robot.subsystems.arm;
 
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.Vector;
+import edu.wpi.first.math.controller.LinearQuadraticRegulator;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N2;
 import edu.wpi.first.math.system.LinearSystem;
@@ -57,12 +58,15 @@ public abstract class ArmSubsystem extends SubsystemBase {
                 Vector<N1> velocityQelms = VecBuilder.fill(RobotController.getBatteryVoltage());
                 // TODO: create a LinearQuadraticRegulator<N1, N1, N1> called velocityController
                 // and intialize with appropriate constants
-                
+                Vector<N1> velocityController = VecBuilder.fill(RobotController.getBatteryVoltage());
                 // TODO: create a double called kPPosition and initialize to
                 // positionController.getK().get(0, 0);
+                Double kPPosition = positionController.getK().get(0,0);
                 // TODO: create a double called kIPosition and intialize to 0.0
+                double kIPosition = 0.0;
                 // TODO: create a double called kDPosition and initialize to
                 // positionController.getK().get(0, 1);
+                double kDPostion = positionController.getK().get(0,1);
                 // TODO: create a double called kPVelocity and initialize to
                 // velocityController.getK().get(0, 0);
                 // TODO: create a double called kIVelocity and initialize to 0.0
